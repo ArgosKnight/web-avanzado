@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper red">
+            <a href="/" class="brand-logo">Mi Sitio</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/about">Acerca de</a></li>
+                <li><a href="/contact">Contacto</a></li>
+                <li><a href="/admin">Admin</a></li>
+                <li><a href="/pokedex">Pokédex</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h3>Registrar Pokémon</h3>
+        <form action="/pokedex" method="POST" class="row">
+            <div class="input-field col s6">
+                <input type="text" name="nombre" required>
+                <label for="nombre">Nombre</label>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" name="tipo" required>
+                <label for="tipo">Tipo</label>
+            </div>
+            <div class="input-field col s6">
+                <input type="number" name="nivel" min="1" max="100" required>
+                <label for="nivel">Nivel</label>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" name="habilidad" required>
+                <label for="habilidad">Habilidad</label>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" name="region" required>
+                <label for="region">Región</label>
+            </div>
+            <div class="col s12">
+                <button type="submit" class="btn waves-effect waves-light red">Guardar</button>
+            </div>
+        </form>
+
+        <h4>Pokémon Registrados</h4>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Nivel</th>
+                    <th>Habilidad</th>
+                    <th>Región</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (pokemons.length > 0) { %>
+                    <% pokemons.forEach(p => { %>
+                        <tr>
+                            <td><%= p.nombre %></td>
+                            <td><%= p.tipo %></td>
+                            <td><%= p.nivel %></td>
+                            <td><%= p.habilidad %></td>
+                            <td><%= p.region %></td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="5" class="center">No hay Pokémon registrados aún.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
