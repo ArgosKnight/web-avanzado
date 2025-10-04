@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi Perfil</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      width: 400px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      background: #4CAF50;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .logout {
+      background: #f44336;
+    }
+    .logout:hover {
+      background: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Mi Cuenta</h1>
+    <form id="profileForm">
+      <label>Nombre</label>
+      <input type="text" name="name" id="name" required>
+
+      <label>Email</label>
+      <input type="email" name="email" id="email" readonly>
+
+      <label>Roles</label>
+      <input type="text" id="roles" readonly>
+
+      <button type="submit">Guardar cambios</button>
+    </form>
+
+    <button class="logout" onclick="logout()">Cerrar sesión</button>
+  </div>
+
+  <script>
+    async function fetchProfile() {
+      const token = sessionStorage.getItem("token");
+      if (!token) {
+        alert("No tienes sesión activa, inicia sesión primero.");
+        window.location.href = "/signin";
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/users/me", {
+          headers: { "Authorization": "Bearer " + token }
+        });
+
+        if (!res.ok) {
+          throw new Error("Error al obtener el perfil");
+        }
+
+        const user = await res.json();
+        document.getElementById("name").value = user.name;
+        document.getElementById("email").value = user.email;
+        document.getElementById("roles").value = user.roles.join(", ");
+      } catch (err) {
+        alert("Error: " + err.message);
+      }
+    }
+
+    // Guardar cambios (ejemplo, puedes implementar PUT /api/users/:id)
+    document.getElementById("profileForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      alert("Aquí implementarías la actualización con un PUT al backend.");
+    });
+
+    function logout() {
+      sessionStorage.removeItem("token");
+      window.location.href = "/signin";
+    }
+
+    // Llamar al cargar la página
+    fetchProfile();
+  </script>
+</body>
+</html>

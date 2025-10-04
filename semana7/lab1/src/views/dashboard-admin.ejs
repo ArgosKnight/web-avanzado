@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Admin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background: #4CAF50;
+      color: white;
+    }
+    button {
+      padding: 5px 10px;
+      border: none;
+      background: #2196F3;
+      color: white;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1976D2;
+    }
+    .logout {
+      background: #f44336;
+      margin-top: 20px;
+    }
+    .logout:hover {
+      background: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+  <h1>Panel de Administrador</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Roles</th>
+        <th>Fecha Registro</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="userTable"></tbody>
+  </table>
+
+  <button class="logout" onclick="logout()">Cerrar sesión</button>
+
+  <script>
+    async function fetchUsers() {
+      const token = sessionStorage.getItem("token");
+      if (!token) {
+        window.location.href = "/signin";
+        return;
+      }
+
+      const res = await fetch("/api/users", {
+        headers: { "Authorization": "Bearer " + token }
+      });
+
+      if (!res.ok) {
+        alert("Acceso prohibido");
+        window.location.href = "/signin";
+        return;
+      }
+
+      const users = await res.json();
+      const tbody = document.getElementById("userTable");
+      tbody.innerHTML = "";
+
+      users.forEach(u => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${u.name || "-"}</td>
+          <td>${u.email}</td>
+          <td>${u.roles.map(r => r.name).join(", ")}</td>
+          <td>${new Date(u.createdAt).toLocaleDateString()}</td>
+          <td><button onclick="viewUser('${u.id}')">Ver</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function viewUser(id) {
+      alert("Aquí podrías implementar /api/users/" + id + " para ver más detalles");
+    }
+
+    function logout() {
+      sessionStorage.removeItem("token");
+      window.location.href = "/signin";
+    }
+
+    fetchUsers();
+  </script>
+</body>
+</html>
