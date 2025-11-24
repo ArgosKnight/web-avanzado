@@ -1,0 +1,72 @@
+{
+  "tickets": [
+    {
+      "id": "726a18b5-79ea-4702-8184-d18cf43b8c33",
+      "title": "Problema 1",
+      "description": "Ocurrió un error en el sistema",
+      "status": "nuevo",
+      "priority": "medium",
+      "assignedUser": null
+    },
+    {
+      "id": "e83fbf35-06ef-4c1b-adfc-3f80ab4e7d5c",
+      "title": "Problema 2",
+      "description": "Ocurrió un error en el sistema",
+      "status": "nuevo",
+      "priority": "medium",
+      "assignedUser": null
+    },
+    {
+      "id": "84a9dcdd-7c84-40aa-b30d-efe8c069aa80",
+      "title": "Problema 3",
+      "description": "Ocurrió un error en el sistema",
+      "status": "nuevo",
+      "priority": "medium",
+      "assignedUser": null
+    }
+  ],
+  "notifications": [
+    {
+      "id": "eca3a436-229e-4b83-b81a-8ff11d568726",
+      "type": "email",
+      "message": "Nuevo ticket creado: Problema 1",
+      "status": "pending",
+      "ticketId": "9a86f35b-c220-45fe-b855-6c09d89c2b54"
+    },
+    {
+      "id": "c143f719-d2b5-421c-a186-4b6ce4a4193b",
+      "type": "email",
+      "message": "El ticket 9a86f35b-c220-45fe-b855-6c09d89c2b54 fue asignado a DANIEL CARDENAS",
+      "status": "pending",
+      "ticketId": "9a86f35b-c220-45fe-b855-6c09d89c2b54"
+    },
+    {
+      "id": "1d174aee-6c4c-42f3-a520-b52749b597d3",
+      "type": "push",
+      "message": "El ticket 9a86f35b-c220-45fe-b855-6c09d89c2b54 cambió a asignado",
+      "status": "pending",
+      "ticketId": "9a86f35b-c220-45fe-b855-6c09d89c2b54"
+    },
+    {
+      "id": "66e4a5fe-b907-486b-be98-273592ae53ce",
+      "type": "email",
+      "message": "Nuevo ticket creado: Problema 1",
+      "status": "pending",
+      "ticketId": "726a18b5-79ea-4702-8184-d18cf43b8c33"
+    },
+    {
+      "id": "f4b72af8-e3e8-43b3-bc8f-bc73d02c831b",
+      "type": "email",
+      "message": "Nuevo ticket creado: Problema 2",
+      "status": "pending",
+      "ticketId": "e83fbf35-06ef-4c1b-adfc-3f80ab4e7d5c"
+    },
+    {
+      "id": "a4ec6d8a-2301-4bbd-89c1-4f357826b613",
+      "type": "email",
+      "message": "Nuevo ticket creado: Problema 3",
+      "status": "pending",
+      "ticketId": "84a9dcdd-7c84-40aa-b30d-efe8c069aa80"
+    }
+  ]
+}
