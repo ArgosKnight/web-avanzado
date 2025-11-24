@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Posts</title>
+
+  <!-- Materialize CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+  <!-- Iconos de Google -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body class="grey lighten-4">
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-wrapper teal">
+      <a href="/" class="brand-logo center">Social Media</a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div class="row" style="margin-top: 20px;">
+      <div class="col s12 right-align">
+        <a href="/posts/create" class="btn waves-effect waves-light teal">
+          <i class="material-icons left">add</i> Nuevo Post
+        </a>
+      </div>
+    </div>
+
+    <h4 class="center-align">Lista de Posts</h4>
+
+    <div class="row">
+      <% if (posts.length === 0) { %>
+        <h6 class="center-align red-text">No hay posts registrados</h6>
+      <% } %>
+
+      <% posts.forEach(post => { %>
+        <div class="col s12 m6 l4">
+          <div class="card">
+
+            <!-- Imagen del post -->
+            <div class="card-image">
+              <img src="<%= post.imageUrl || 'https://via.placeholder.com/400x250?text=Sin+Imagen' %>" alt="Imagen del post">
+            </div>
+
+            <!-- Contenido -->
+            <div class="card-content">
+              <span class="card-title"><%= post.title %></span>
+
+              <p><%= post.content %></p>
+
+              <p style="margin-top: 10px;">
+                <strong>Hashtags:</strong><br>
+                <% if (post.hashtags && post.hashtags.length > 0) { %>
+                  <% post.hashtags.forEach(tag => { %>
+                    <span class="chip">#<%= tag %></span>
+                  <% }) %>
+                <% } else { %>
+                  <span class="grey-text">Sin hashtags</span>
+                <% } %>
+              </p>
+
+              <p class="grey-text" style="font-size: 12px; margin-top: 10px;">
+                Creado: <%= post.createdAt ? post.createdAt.toLocaleDateString() : '---' %>
+              </p>
+            </div>
+
+            <!-- Acciones -->
+            <div class="card-action">
+              <a href="/posts/edit/<%= post._id %>" class="btn-flat teal-text">
+                <i class="material-icons">edit</i>
+              </a>
+
+              <a href="/posts/delete/<%= post._id %>" class="btn-flat red-text">
+                <i class="material-icons">delete</i>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      <% }) %>
+    </div>
+
+  </div>
+
+  <!-- Materialize JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</body>
+</html
